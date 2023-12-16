@@ -1,0 +1,64 @@
+version: 1
+
+groups:
+  docker:
+    help: control the docker from makim
+    targets:
+      up:
+        help: Start the services
+        run: |
+          docker compose up -d
+      stop:
+        help: Stop the services
+        run: |
+          docker compose stop
+
+      config-with-bash:
+        help: show information for the services using bash and using jinja2
+        env-file:
+          .env
+        shell: bash
+        run: |
+          {% for service in env.SERVICES.split(",") %}
+          docker compose config "{{service}}"
+          {% endfor %}
+
+      config-with-xonsh:
+        help: show information for the services using xonsh (https://xon.sh/bash_to_xsh.html?highlight=env)
+        env-file:
+          .env
+        run: |
+          for service in {{ env.SERVICES.split(",") }}:
+            docker compose config @(service)
+
+  path:
+    help: targets that handles path
+    targets:
+      workdir:
+        help: shows how to use the working directory
+        working-directory: /tmp
+        run:
+          pwd
+
+  python:
+    help: "some commands using python as interpreter"
+    shell: python
+    targets:
+      test-a-gt-b:
+        help: target that shows how to use assert
+        args:
+          a:
+            help: Argument a
+            type: int
+            required: true
+          b:
+            help: Argument b
+            type: int
+            required: true
+        run: assert {{ args.a }} > {{ args.b }}
+      debug:
+        help: target that shows how to use assert
+        run: |
+          breakpoint()
+          print("breakpoint works!")
+              

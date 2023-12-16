@@ -1,0 +1,34 @@
+version: 1.0
+env-file: .env.sugar
+compose-app: docker compose
+defaults:
+  group: {{ env.SUGAR_GROUP }}
+  project-name: sugar-{{ env.SUGAR_PROJECT_NAME }}
+groups:
+  - name: prod
+    compose-path: 
+      - docker-compose-sugar.yaml
+    env-file: .env.sugar
+    services:
+      default: s1,s2
+      available:
+        - name: s1
+        - name: s2
+
+  - name: dev
+    compose-path: 
+      - docker-compose-sugar.yaml
+    env-file: .env.sugar
+    services:
+      default: s1
+      available:
+        - name: s1
+
+  - name: staging
+    compose-path: 
+      - docker-compose-sugar.yaml
+    env-file: .env.sugar
+    services:
+      default: s3
+      available:
+        - name: s3

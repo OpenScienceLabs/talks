@@ -1,0 +1,14 @@
+name: pyconbo2023
+channels:
+  - nodefaults
+  - conda-forge
+dependencies:
+  - python 3.11.*
+  - pip
+  - make
+  - pip:
+    - containers-sugar==1.9.2
+    - makim==1.9.1
+    - envers==0.2.0
+    - jupyterlab
+    - compose-go
