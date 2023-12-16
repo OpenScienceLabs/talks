@@ -1,0 +1,15 @@
+version: 0.1
+releases:
+  '1.0':
+    status: deployed
+    docs: ''
+    profiles:
+    - base
+    spec:
+      files:
+        .env.envers:
+          type: dotenv
+          vars:
+            ENV:
+              type: string
+              default: dev
