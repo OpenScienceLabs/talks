@@ -2,10 +2,10 @@ version: "3.9"
 services:
   s1:
     image: python:3.11
-    command: "python -m http.server $S1_PORT"
+    command: "python -m http.server 18000"
   s2:
     image: python:3.11
-    command: "python -m http.server $S2_PORT"
+    command: "python -m http.server 18001"
   s3:
     image: python:3.11
-    command: "python -m http.server $S3_PORT"
+    command: "python -m http.server 18002"
